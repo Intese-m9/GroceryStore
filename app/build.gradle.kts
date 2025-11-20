@@ -8,6 +8,10 @@ android {
     namespace = "com.example.grocerystore"
     compileSdk = 36
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
+    
     defaultConfig {
         applicationId = "com.example.grocerystore"
         minSdk = 26
