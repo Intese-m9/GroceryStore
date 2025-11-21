@@ -2,9 +2,11 @@ package com.example.grocerystore.data.repositoryIMPL
 
 import com.example.grocerystore.domain.models.ProductsFeature
 import com.example.grocerystore.domain.repository.GetAllProductsRepo
+import kotlinx.coroutines.delay
 
 class GetAllProductsImpl : GetAllProductsRepo {
     override suspend fun loadProducts(): List<ProductsFeature> {
+        delay(3000)
         return listOf(
             ProductsFeature("1", "Apple", 2.99, "Fruits", "https://example.com/apple.jpg"),
             ProductsFeature("2", "Banana", 1.99, "Fruits", "https://example.com/banana.jpg"),

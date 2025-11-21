@@ -49,7 +49,7 @@ class ProductViewModelFeature(
         scope = viewModelScope, started = SharingStarted.WhileSubscribed(5000), initialValue = 0
     )
 
-    private val _showToast: MutableSharedFlow<UIStateEvent> = MutableSharedFlow(replay = 1)
+    private val _showToast: MutableSharedFlow<UIStateEvent> = MutableSharedFlow()
     val showToast get() = _showToast
 
     val filteredQuery = combine(
