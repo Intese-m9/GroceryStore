@@ -1,9 +1,7 @@
 package com.example.grocerystore.presentation.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,14 +17,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.example.grocerystore.presentation.viewmodels.ProductViewModelFeature
 import com.example.grocerystore.ui.components.ProductItem
 
 @Composable
 fun ProductScreen(
-    viewModelFeature: ProductViewModelFeature,
-    navController: NavHostController
+    viewModelFeature: ProductViewModelFeature
 ) {
     val products by viewModelFeature.filteredQuery.collectAsState()
     val searchQuery by viewModelFeature.searchQuery.collectAsState()
@@ -34,11 +30,10 @@ fun ProductScreen(
     val selectedCategory by viewModelFeature.selectedCategory.collectAsState()
     Scaffold(topBar = {
         Column {
-            Text(
-                text = "Grocery Store", modifier = Modifier.padding(16.dp)
-            )
             TextField(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 15.dp)
+                    .fillMaxWidth(),
                 value = searchQuery,
                 onValueChange = viewModelFeature::onSearchQueryChanged
             )
@@ -53,24 +48,7 @@ fun ProductScreen(
                         label = { Text(text = category) },
                     )
                 }
-
             }
-        }
-
-
-    }, bottomBar = {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "All")
-            Text(
-                modifier = Modifier.clickable {
-                    navController.navigate("addToCartProducts")
-                }, text = "Cart"
-            )
         }
     }) { innerPadding ->
         LazyColumn(

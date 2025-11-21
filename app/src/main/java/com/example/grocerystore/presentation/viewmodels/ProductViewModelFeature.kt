@@ -85,9 +85,9 @@ class ProductViewModelFeature(
         viewModelScope.launch {
             _products.update { currentState ->
                 val result = getAllProductsUseCase.getProducts()
+                showMessage("Данные загружены")
                 currentState.plus(result)
             }
-            showMessage("Данные загружены")
             _allProducts = _products.value
         }
     }
