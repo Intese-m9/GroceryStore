@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GroceryStoreTheme {
                 val navController = rememberNavController()
-                LaunchedEffect(Unit) {
+                LaunchedEffect(viewModelFeature) {
                     viewModelFeature.showToast.collect { stateEvent ->
                         when (stateEvent) {
                             is UIStateEvent.ShowToast -> {
