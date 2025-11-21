@@ -3,6 +3,7 @@ package com.example.grocerystore.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.grocerystore.domain.models.ProductsFeature
+import com.example.grocerystore.domain.usecase.GetAllProductsUseCase
 import com.example.grocerystore.presentation.utils.events.UIStateEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +18,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.text.contains
 
-class ProductViewModelFeature : ViewModel() {
+class ProductViewModelFeature(
+    private val getAllProductsUseCase: GetAllProductsUseCase
+) : ViewModel() {
     private val _products = MutableStateFlow<List<ProductsFeature>>(emptyList())
 
     private val _searchQuery = MutableStateFlow("")
@@ -76,18 +79,14 @@ class ProductViewModelFeature : ViewModel() {
     }
 
     private fun loadProducts() {
-        _products.value = listOf(
-            ProductsFeature("1", "Apple", 2.99, "Fruits", "https://example.com/apple.jpg"),
-            ProductsFeature("2", "Banana", 1.99, "Fruits", "https://example.com/banana.jpg"),
-            ProductsFeature("3", "Milk", 3.49, "Dairy", "https://example.com/milk.jpg"),
-            ProductsFeature("4", "Bread", 2.29, "Bakery", "https://example.com/bread.jpg"),
-            ProductsFeature("5", "Eggs", 4.99, "Dairy", "https://example.com/eggs.jpg"),
-            ProductsFeature("6", "Tomato", 1.49, "Vegetables", "https://example.com/tomato.jpg"),
-            ProductsFeature("7", "Cheese", 5.99, "Dairy", "https://example.com/cheese.jpg"),
-            ProductsFeature("8", "Orange", 3.99, "Fruits", "https://example.com/orange.jpg")
-        )
-        showMessage("Данные загружены")
-        _allProducts = _products.value
+        viewModelScope.launch {
+            _products.update { currentState ->
+                val result = getAllProductsUseCase.getProducts()
+                currentState.plus(result)
+            }
+            showMessage("Данные загружены")
+            _allProducts = _products.value
+        }
     }
 
     fun addProductToCart(product: ProductsFeature) {
