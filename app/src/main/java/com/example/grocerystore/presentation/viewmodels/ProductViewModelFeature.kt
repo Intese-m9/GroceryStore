@@ -59,7 +59,10 @@ class ProductViewModelFeature(
             product
         } else {
             product.filter {
-                it.name.contains(query.capitalize()) || it.category.contains(query.capitalize())
+                it.name.contains(query, ignoreCase = true) || it.category.contains(
+                    query,
+                    ignoreCase = true
+                )
             }
         }
     }.stateIn(
@@ -107,9 +110,6 @@ class ProductViewModelFeature(
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
-        _products.value.map {
-            it.name == query
-        }
     }
 
     fun onCategorySelected(category: String) {
@@ -126,7 +126,7 @@ class ProductViewModelFeature(
     fun clearCart() {
         _productCart.update { currentState ->
             showMessage("Все товары удалены")
-            currentState.minus(currentState)
+            emptyList()
         }
     }
 }
