@@ -23,6 +23,8 @@ import com.example.grocerystore.ui.theme.GroceryStoreTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.grocerystore.data.FakeUserApiService
+import com.example.grocerystore.data.mappers.ProductsMapper
 import com.example.grocerystore.data.repositoryIMPL.GetAllProductsImpl
 import com.example.grocerystore.domain.usecase.GetAllProductsUseCase
 import com.example.grocerystore.presentation.utils.events.UIStateEvent
@@ -31,7 +33,14 @@ import com.example.grocerystore.presentation.viewmodels.ProductViewModelFeature
 
 class MainActivity : ComponentActivity() {
     private val viewModelFeature: ProductViewModelFeature by viewModels {
-        MyViewModelFactory(GetAllProductsUseCase(GetAllProductsImpl()))
+        MyViewModelFactory(
+            GetAllProductsUseCase(
+                GetAllProductsImpl(
+                    fakeUserApiService = FakeUserApiService(),
+                    productsMapper = ProductsMapper()
+                )
+            )
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
