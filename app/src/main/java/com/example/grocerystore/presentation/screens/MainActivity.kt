@@ -23,12 +23,15 @@ import com.example.grocerystore.ui.theme.GroceryStoreTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.grocerystore.data.di.AppContainer
+import com.example.grocerystore.data.di.MyApplication
 import com.example.grocerystore.presentation.utils.events.UIStateEvent
 import com.example.grocerystore.presentation.viewmodels.ProductViewModelFeature
 
 class MainActivity : ComponentActivity() {
-    private val appContainer = AppContainer()
+
+    private val appContainer by lazy {
+        MyApplication().appContainer
+    }
     private val viewModelFeature: ProductViewModelFeature by viewModels {
         appContainer.viewModelFeatureFactory
     }
