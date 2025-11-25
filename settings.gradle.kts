@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Grocery store"
 include(":app")
- 
+include(":feature-xml-userList")
