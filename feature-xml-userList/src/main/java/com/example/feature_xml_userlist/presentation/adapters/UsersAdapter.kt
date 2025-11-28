@@ -12,16 +12,16 @@ class UsersAdapter(
     private val onUserClick: (User) -> Unit
 ) : ListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCallBack) {
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): UserViewHolder {
-        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemUserBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(
-        holder: UserViewHolder,
-        position: Int
+        holder: UserViewHolder, position: Int
     ) {
         holder.bind(getItem(position))
     }
