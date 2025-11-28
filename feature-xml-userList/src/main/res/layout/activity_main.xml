@@ -23,6 +23,7 @@
 
     <!-- Прогресс бар -->
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -54,6 +55,7 @@
 
     <!-- Сообщение об ошибке -->
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/errorCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

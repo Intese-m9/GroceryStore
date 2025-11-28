@@ -62,6 +62,7 @@ serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 composeNavigagion = {group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation"}
 hiltNavigationCompose = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavCompose"}
+activity-ktx = {group = "androidx.activity", name = "activity-ktx", version.ref = "activity"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

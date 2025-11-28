@@ -20,6 +20,10 @@ class UserViewModel : ViewModel() {
     private val _events: MutableSharedFlow<UserEvent> = MutableSharedFlow()
     val events get() = _events.asSharedFlow()
 
+    init {
+        loadUsers()
+    }
+
     //error точно нужно указывать явно на null, если в первичном конструкторе уже null
     fun loadUsers() {
         viewModelScope.launch {
