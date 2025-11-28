@@ -30,7 +30,7 @@ class UserViewModel : ViewModel() {
             _uiState.update { it.copy(isLoading = true, error = null) }
             try {
                 delay(1000)
-                val users = listOf<User>(
+                val users = listOf(
                     User(1, "John Doe", "john@example.com"),
                     User(2, "Jane Smith", "jane@example.com"),
                     User(3, "Bob Johnson", "bob@example.com")
