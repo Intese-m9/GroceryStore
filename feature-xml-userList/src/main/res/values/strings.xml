@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="user_list">User List</string>
+    <string name="fragment_a">Fragment A</string>
+    <string name="count">Count:</string>
+    <string name="go_to_fragment_b">Go to fragment B</string>
+    <string name="put_one_to_count_state">Put one to count state</string>
+    <string name="fragment_b">Fragment B</string>
+    <string name="go_to_fragment_a">Go to fragment A</string>
+    <string name="put_away_one_in_count_state">Put away one in count state</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.viewmodel)
     implementation(libs.activity.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.fragment.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

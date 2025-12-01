@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.feature_xml_userlist.R
 import com.example.feature_xml_userlist.databinding.ActivityMainBinding
 import com.example.feature_xml_userlist.presentation.actions.UserEvent
 import com.example.feature_xml_userlist.presentation.adapters.UsersAdapter
+import com.example.feature_xml_userlist.presentation.screens.fragments.FragmentA
 import com.example.feature_xml_userlist.presentation.utils.UserUIState
 import com.example.feature_xml_userlist.presentation.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
@@ -34,9 +36,19 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setUpClickListeners()
         observeViewModel()
+        setupFragments()
 
     }
 
+    private fun setupFragments(){
+        if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
+            val fragment = FragmentA()
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment)
+                .commit()
+        }
+    }
     private fun setupRecyclerView() {
         binding.usersRecyclerView.apply {
             adapter = usersAdapter
