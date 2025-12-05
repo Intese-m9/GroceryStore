@@ -24,7 +24,6 @@ class UserViewModel : ViewModel() {
         loadUsers()
     }
 
-    //error точно нужно указывать явно на null, если в первичном конструкторе уже null
     fun loadUsers() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
