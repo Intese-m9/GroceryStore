@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.activity.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.fragment.ktx)
+    implementation(libs.fragment.navigation)
+    implementation(libs.ui.navigation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

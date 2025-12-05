@@ -9,12 +9,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.feature_xml_userlist.R
 import com.example.feature_xml_userlist.databinding.FragmentABinding
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
+
 class FragmentA : Fragment() {
     private lateinit var binding: FragmentABinding
+    private lateinit var navController: NavController
     private lateinit var viewModelShared: SharedViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +31,7 @@ class FragmentA : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelShared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        navController = findNavController()
         observeViewModel()
         setUpClickListeners()
     }
@@ -37,10 +42,7 @@ class FragmentA : Fragment() {
         }
 
         binding.transitionButtonToBFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FragmentB())
-                .addToBackStack(null)
-                .commit()
+            navController.navigate(R.id.action_toFragment_B)
         }
     }
 

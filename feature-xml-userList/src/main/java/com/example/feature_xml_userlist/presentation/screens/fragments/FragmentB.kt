@@ -9,12 +9,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.feature_xml_userlist.databinding.FragmentBBinding
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
 
 class FragmentB : Fragment() {
     private lateinit var binding: FragmentBBinding
+    private lateinit var navController: NavController
     private lateinit var viewModelShared: SharedViewModel
 
     override fun onCreateView(
@@ -27,6 +30,7 @@ class FragmentB : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelShared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        navController = findNavController()
         observeViewModel()
         setUpClickListeners()
     }
@@ -36,7 +40,7 @@ class FragmentB : Fragment() {
             viewModelShared.decrement()
         }
         binding.transitionButtonToAFragment.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            navController.popBackStack()
         }
     }
 
