@@ -5,20 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.feature_xml_userlist.databinding.FragmentBBinding
+import com.example.feature_xml_userlist.presentation.screens.MainActivity
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
 
 class FragmentB : Fragment() {
     private lateinit var binding: FragmentBBinding
     private lateinit var navController: NavController
-    private lateinit var viewModelShared: SharedViewModel
+    private val featureContainer get() = (requireActivity() as MainActivity).featureContainer
+    private val viewModelShared by viewModels<SharedViewModel> {
+        featureContainer.provideSharedViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,7 +33,6 @@ class FragmentB : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelShared = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         navController = findNavController()
         observeViewModel()
         setUpClickListeners()

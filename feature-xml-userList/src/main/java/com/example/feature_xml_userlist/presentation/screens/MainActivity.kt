@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feature_xml_userlist.databinding.ActivityMainBinding
+import com.example.feature_xml_userlist.di.FeatureContainer
 import com.example.feature_xml_userlist.presentation.actions.UserEvent
 import com.example.feature_xml_userlist.presentation.adapters.UsersAdapter
 import com.example.feature_xml_userlist.presentation.utils.UserUIState
@@ -21,9 +22,11 @@ import kotlin.getValue
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModelFeature: UserViewModel by viewModels()
-
     private val usersAdapter = UsersAdapter { user ->
         viewModelFeature.selectedUser(user)
+    }
+    val featureContainer by lazy {
+        FeatureContainer(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

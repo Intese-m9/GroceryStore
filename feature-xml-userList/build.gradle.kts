@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.fragment.ktx)
     implementation(libs.fragment.navigation)
     implementation(libs.ui.navigation)
+    implementation(libs.datastore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
