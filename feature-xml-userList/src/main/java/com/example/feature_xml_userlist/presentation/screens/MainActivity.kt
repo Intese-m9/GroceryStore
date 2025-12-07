@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(state: UserUIState) {
         binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.navHostFragment.visibility = if (state.isLoading) View.GONE else View.VISIBLE
 
         usersAdapter.submitList(state.users)
         binding.usersRecyclerView.visibility = if (state.isLoading) View.GONE else View.VISIBLE
