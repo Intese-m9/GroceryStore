@@ -30,9 +30,9 @@ class UserViewModel : ViewModel() {
             try {
                 delay(1000)
                 val users = listOf(
-                    User(1, "John Doe", "john@example.com"),
-                    User(2, "Jane Smith", "jane@example.com"),
-                    User(3, "Bob Johnson", "bob@example.com")
+                    User(1, "John Doe", "john@example.com", false),
+                    User(2, "Jane Smith", "jane@example.com", false),
+                    User(3, "Bob Johnson", "bob@example.com", false)
                 )
                 _uiState.update { it.copy(isLoading = false, users = users) }
                 _events.emit(UserEvent.ShowMessage(message = "Users loaded successfully"))
@@ -43,9 +43,16 @@ class UserViewModel : ViewModel() {
             }
         }
     }
-
     fun selectedUser(user: User) {
-        _uiState.update { it.copy(selectedUser = user) }
+        _uiState.update { currentUser ->
+            currentUser.copy(
+                users = currentUser.users.map {
+                    if (it.id == user.id) {
+                        it.copy(isRead = true)
+                    } else it
+                }
+            )
+        }
         viewModelScope.launch {
             _events.emit(UserEvent.ShowMessage(message = "Selected: ${user.name}"))
         }

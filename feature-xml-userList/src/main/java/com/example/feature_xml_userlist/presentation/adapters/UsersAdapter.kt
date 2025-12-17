@@ -1,5 +1,6 @@
 package com.example.feature_xml_userlist.presentation.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -23,19 +24,58 @@ class UsersAdapter(
     override fun onBindViewHolder(
         holder: UserViewHolder, position: Int
     ) {
-        holder.bind(getItem(position))
+        holder.bindFull(getItem(position))
+    }
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int, payloads: List<Any?>) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            val user = getItem(position)
+
+
+            for (payload in payloads) {
+                when (payload) {
+                    "name_change" -> {
+                        holder.nameChange(user.name)
+                    }
+
+                    "email_change" -> {
+                        holder.emailChange(user.email)
+                    }
+
+                    "read_change" -> {
+                        holder.updateReadColor(user.isRead)
+                    }
+                }
+            }
+        }
+
     }
 
     inner class UserViewHolder(
         private val binding: ItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
+        fun bindFull(user: User) {
             binding.userName.text = user.name
             binding.userEmail.text = user.email
-
+            updateReadColor(user.isRead)
             binding.root.setOnClickListener {
                 onUserClick(user)
             }
+        }
+
+        fun nameChange(name: String) {
+            binding.userName.text = name
+        }
+
+        fun emailChange(email: String) {
+            binding.userEmail.text = email
+        }
+
+        fun updateReadColor(isRead: Boolean) {
+            val colorState = if (isRead) Color.GREEN else Color.RED
+            binding.userName.setTextColor(colorState)
         }
     }
 }
