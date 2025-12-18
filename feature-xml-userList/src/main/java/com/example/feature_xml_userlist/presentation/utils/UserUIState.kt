@@ -6,5 +6,5 @@ data class UserUIState(
     val isLoading:Boolean = false,
     val users:List<User> = emptyList(),
     val selectedUser:User? = null,
-    val error:String? = null
+    val error:String? = null,
 )

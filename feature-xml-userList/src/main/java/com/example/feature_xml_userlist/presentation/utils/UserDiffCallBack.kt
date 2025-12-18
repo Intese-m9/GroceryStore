@@ -18,4 +18,22 @@ object UserDiffCallBack : DiffUtil.ItemCallback<User>() {
         return oldItem == newItem
     }
 
+    override fun getChangePayload(oldItem: User, newItem: User): Any? {
+        val payload = mutableListOf<String>()
+
+        if (oldItem.name != newItem.name) {
+            payload.add("name_change")
+        }
+
+        if (oldItem.email != newItem.email) {
+            payload.add("email_change")
+        }
+
+        if (oldItem.isRead != newItem.isRead){
+            payload.add("read_change")
+        }
+
+        return null
+    }
+
 }
