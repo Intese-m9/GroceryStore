@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         binding.navHostFragment.visibility = if (state.isLoading) View.GONE else View.VISIBLE
 
         usersAdapter.submitList(state.users)
+
         binding.usersRecyclerView.visibility = if (state.isLoading) View.GONE else View.VISIBLE
 
         if (state.error != null) {

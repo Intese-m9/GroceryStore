@@ -1,5 +1,6 @@
 package com.example.feature_xml_userlist.presentation.utils
 
+import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import com.example.feature_xml_userlist.domain.models.User
 
@@ -29,11 +30,12 @@ object UserDiffCallBack : DiffUtil.ItemCallback<User>() {
             payload.add("email_change")
         }
 
-        if (oldItem.isRead != newItem.isRead){
+        if (oldItem.isRead != newItem.isRead) {
             payload.add("read_change")
+            Log.d("DEBUG", "Diff: isRead changed, payload = $payload")
         }
 
-        return null
+        return payload.ifEmpty { null }
     }
 
 }
