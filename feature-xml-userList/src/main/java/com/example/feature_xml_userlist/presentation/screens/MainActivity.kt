@@ -9,11 +9,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feature_xml_userlist.databinding.ActivityMainBinding
 import com.example.feature_xml_userlist.di.FeatureContainer
 import com.example.feature_xml_userlist.presentation.actions.UserEvent
 import com.example.feature_xml_userlist.presentation.adapters.UsersAdapter
+import com.example.feature_xml_userlist.presentation.utils.DragItemTouchCallBack
 import com.example.feature_xml_userlist.presentation.utils.UserUIState
 import com.example.feature_xml_userlist.presentation.viewmodels.UserViewModel
 import kotlinx.coroutines.launch
@@ -21,6 +23,7 @@ import kotlin.getValue
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var itemTouchListener: ItemTouchHelper
     private val viewModelFeature: UserViewModel by viewModels()
     private val usersAdapter = UsersAdapter { user ->
         viewModelFeature.selectedUser(user)
@@ -51,7 +54,19 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+        usersAdapter.setOnStartDruggable {
+            itemTouchListener.startDrag(it)
+        }
+        val callback = DragItemTouchCallBack(
+            adapter = usersAdapter,
+            onItemMoved = { fromPosition, toPosition ->
+                viewModelFeature.movePositionInRecyclerView(fromPosition, toPosition)
+            }
+        )
+        itemTouchListener = ItemTouchHelper(callback)
+        itemTouchListener.attachToRecyclerView(binding.usersRecyclerView)
     }
+
 
     private fun setUpClickListeners() {
         binding.loadButton.setOnClickListener {
