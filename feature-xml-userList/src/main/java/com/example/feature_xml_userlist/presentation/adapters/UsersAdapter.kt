@@ -3,6 +3,7 @@ package com.example.feature_xml_userlist.presentation.adapters
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,14 @@ import com.example.feature_xml_userlist.domain.models.User
 import com.example.feature_xml_userlist.presentation.utils.UserDiffCallBack
 
 class UsersAdapter(
-    private val onUserClick: (User) -> Unit
+    private val onUserClick: (User) -> Unit,
 ) : ListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCallBack) {
+    private var onStartDrag: ((RecyclerView.ViewHolder) -> Unit)? = null
+
+    fun setOnStartDruggable(listener: (RecyclerView.ViewHolder) -> Unit) {
+        onStartDrag = listener
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): UserViewHolder {
@@ -67,6 +74,16 @@ class UsersAdapter(
     inner class UserViewHolder(
         private val binding: ItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.userEmail.setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    onStartDrag?.invoke(this)
+                }
+                false
+            }
+        }
+
         fun bindFull(user: User) {
             binding.userName.text = user.name
             binding.userEmail.text = user.email

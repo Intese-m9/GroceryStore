@@ -30,9 +30,9 @@ class UserViewModel : ViewModel() {
             try {
                 delay(1000)
                 val users = listOf(
-                    User(1, "John Doe", "john@example.com", false),
-                    User(2, "Jane Smith", "jane@example.com", false),
-                    User(3, "Bob Johnson", "bob@example.com", false)
+                    User(1, "John Doe", "john@example.com", false, 0),
+                    User(2, "Jane Smith", "jane@example.com", false, 1),
+                    User(3, "Bob Johnson", "bob@example.com", false, 2)
                 )
                 _uiState.update { it.copy(isLoading = false, users = users) }
                 _events.emit(UserEvent.ShowMessage(message = "Users loaded successfully"))
@@ -43,6 +43,31 @@ class UserViewModel : ViewModel() {
             }
         }
     }
+
+    fun movePositionInRecyclerView(fromPosition: Int, toPosition: Int) {
+        _uiState.update { currentState ->
+            val currentUser = currentState.users[fromPosition]
+
+            val before = currentState.users.take(fromPosition)
+            val after = currentState.users.drop(fromPosition + 1)
+
+            val listWithoutCurrentUser = before + after
+
+            val newPositionUserItem =
+                listWithoutCurrentUser
+                    .take(toPosition) + currentUser + listWithoutCurrentUser.drop(
+                    toPosition
+                )
+
+            val totalList = newPositionUserItem.mapIndexed { index, user ->
+                user.copy(position = index)
+            }
+
+            currentState.copy(users = totalList)
+
+        }
+    }
+
     fun selectedUser(user: User) {
         _uiState.update { currentUser ->
             currentUser.copy(
