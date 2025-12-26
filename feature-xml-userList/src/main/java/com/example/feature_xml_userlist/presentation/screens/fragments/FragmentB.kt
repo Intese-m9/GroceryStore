@@ -1,6 +1,7 @@
 package com.example.feature_xml_userlist.presentation.screens.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,17 @@ class FragmentB : Fragment() {
     private val featureContainer get() = (requireActivity() as MainActivity).featureContainer
     private val viewModelShared by viewModels<SharedViewModel> {
         featureContainer.provideSharedViewModelFactory()
+    }
+
+    companion object {
+        private const val DATA_IN_FRAGMENT_A_KEY = "123"
+        private const val LOGGING_DATA_BUNDLE = "LOGGER"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val data = arguments?.getString(DATA_IN_FRAGMENT_A_KEY)
+        Log.d(LOGGING_DATA_BUNDLE, data.toString())
     }
 
     override fun onCreateView(

@@ -45,7 +45,13 @@ class FragmentA : Fragment() {
         }
 
         binding.transitionButtonToBFragment.setOnClickListener {
-            navController.navigate(R.id.action_toFragment_B)
+            val currentData = Bundle().apply {
+                putString("123","Bla_bla_bla")
+            }
+            navController.navigate(
+                R.id.action_toFragment_B,
+                currentData
+            )
         }
     }
 
