@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-        usersAdapter.setOnStartDruggable {
-            itemTouchListener.startDrag(it)
+        usersAdapter.setOnStartDruggable { holder  ->
+            itemTouchListener.startDrag(holder)
         }
         val callback = DragItemTouchCallBack(
             adapter = usersAdapter,
