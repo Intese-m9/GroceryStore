@@ -20,6 +20,10 @@
         <action
             android:id="@+id/action_toFragment_A"
             app:destination="@id/fragmentA" />
+        <argument
+            android:name="message"
+            app:argType="string"
+            android:defaultValue="Default message"/>
     </fragment>
 
 </navigation>

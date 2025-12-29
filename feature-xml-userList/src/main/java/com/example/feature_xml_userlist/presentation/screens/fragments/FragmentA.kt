@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.feature_xml_userlist.R
 import com.example.feature_xml_userlist.databinding.FragmentABinding
 import com.example.feature_xml_userlist.presentation.screens.MainActivity
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
@@ -44,8 +43,10 @@ class FragmentA : Fragment() {
             viewLifecycleOwner
         ) { requestKey, bundle ->
             if (requestKey == "fragmentA_callback_key3455") {
-                Toast.makeText(requireContext(),
-                    bundle.getString("result"), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    bundle.getString("result"), Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
@@ -57,13 +58,8 @@ class FragmentA : Fragment() {
         }
 
         binding.transitionButtonToBFragment.setOnClickListener {
-            val currentData = Bundle().apply {
-                putString("123", "Bla_bla_bla")
-            }
-            navController.navigate(
-                R.id.action_toFragment_B,
-                currentData
-            )
+            val action = FragmentADirections.actionToFragmentB("Hello_Message")
+            navController.navigate(action)
         }
     }
 
