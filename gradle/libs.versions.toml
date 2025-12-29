@@ -73,3 +73,4 @@ datastore = { group = "androidx.datastore", name = "datastore-preferences", vers
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+safeArgs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "framgentNav"}

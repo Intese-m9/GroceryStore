@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.feature_xml_userlist.databinding.FragmentBBinding
 import com.example.feature_xml_userlist.presentation.screens.MainActivity
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
@@ -25,16 +26,16 @@ class FragmentB : Fragment() {
     private val viewModelShared by viewModels<SharedViewModel> {
         featureContainer.provideSharedViewModelFactory()
     }
+    private val args: FragmentBArgs by navArgs()
 
     companion object {
-        private const val DATA_IN_FRAGMENT_A_KEY = "123"
         private const val LOGGING_DATA_BUNDLE = "LOGGER"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val data = arguments?.getString(DATA_IN_FRAGMENT_A_KEY)
-        Log.d(LOGGING_DATA_BUNDLE, data.toString())
+        val data = args.message
+        Log.d(LOGGING_DATA_BUNDLE, data)
     }
 
     override fun onCreateView(
@@ -56,7 +57,7 @@ class FragmentB : Fragment() {
             viewModelShared.decrement()
         }
         binding.transitionButtonToAFragment.setOnClickListener {
-           val result = "ДРуацвывыаываываыва"
+            val result = "ДРуацвывыаываываыва"
             parentFragmentManager.setFragmentResult(
                 "fragmentA_callback_key3455",
                 bundleOf("result" to result)
