@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -55,6 +56,11 @@ class FragmentB : Fragment() {
             viewModelShared.decrement()
         }
         binding.transitionButtonToAFragment.setOnClickListener {
+           val result = "ДРуацвывыаываываыва"
+            parentFragmentManager.setFragmentResult(
+                "fragmentA_callback_key3455",
+                bundleOf("result" to result)
+            )
             navController.popBackStack()
         }
     }
