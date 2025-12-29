@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,9 +22,10 @@ class FragmentA : Fragment() {
     private lateinit var binding: FragmentABinding
     private lateinit var navController: NavController
     private val featureContainer get() = (requireActivity() as MainActivity).featureContainer
-    private val viewModelShared by viewModels<SharedViewModel>{
+    private val viewModelShared by viewModels<SharedViewModel> {
         featureContainer.provideSharedViewModelFactory()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +39,16 @@ class FragmentA : Fragment() {
         navController = findNavController()
         observeViewModel()
         setUpClickListeners()
+        parentFragmentManager.setFragmentResultListener(
+            "fragmentA_callback_key3455",
+            viewLifecycleOwner
+        ) { requestKey, bundle ->
+            if (requestKey == "fragmentA_callback_key3455") {
+                Toast.makeText(requireContext(),
+                    bundle.getString("result"), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 
     private fun setUpClickListeners() {
@@ -45,7 +57,13 @@ class FragmentA : Fragment() {
         }
 
         binding.transitionButtonToBFragment.setOnClickListener {
-            navController.navigate(R.id.action_toFragment_B)
+            val currentData = Bundle().apply {
+                putString("123", "Bla_bla_bla")
+            }
+            navController.navigate(
+                R.id.action_toFragment_B,
+                currentData
+            )
         }
     }
 
