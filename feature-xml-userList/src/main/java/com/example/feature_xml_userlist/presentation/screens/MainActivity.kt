@@ -15,6 +15,7 @@ import com.example.feature_xml_userlist.databinding.ActivityMainBinding
 import com.example.feature_xml_userlist.di.FeatureContainer
 import com.example.feature_xml_userlist.presentation.actions.UserEvent
 import com.example.feature_xml_userlist.presentation.adapters.UsersAdapter
+import com.example.feature_xml_userlist.presentation.screens.fragments.FragmentsFactory
 import com.example.feature_xml_userlist.presentation.utils.DragItemTouchCallBack
 import com.example.feature_xml_userlist.presentation.utils.UserUIState
 import com.example.feature_xml_userlist.presentation.viewmodels.UserViewModel
@@ -33,10 +34,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = FragmentsFactory(featureContainer)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupRecyclerView()
         setUpClickListeners()
         observeViewModel()
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-        usersAdapter.setOnStartDruggable { holder  ->
+        usersAdapter.setOnStartDruggable { holder ->
             itemTouchListener.startDrag(holder)
         }
         val callback = DragItemTouchCallBack(
