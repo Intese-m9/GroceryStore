@@ -9,24 +9,23 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.feature_xml_userlist.databinding.FragmentBBinding
-import com.example.feature_xml_userlist.presentation.screens.MainActivity
 import com.example.feature_xml_userlist.presentation.viewmodels.SharedViewModel
 import kotlinx.coroutines.launch
 
-class FragmentB : Fragment() {
+class FragmentB(
+    private val viewModelProvider: ViewModelProvider.Factory
+) : Fragment() {
     private lateinit var binding: FragmentBBinding
     private lateinit var navController: NavController
-    private val featureContainer get() = (requireActivity() as MainActivity).featureContainer
-    private val viewModelShared by viewModels<SharedViewModel> {
-        featureContainer.provideSharedViewModelFactory()
-    }
     private val args: FragmentBArgs by navArgs()
+    private val viewModelShared by viewModels<SharedViewModel> { viewModelProvider }
 
     companion object {
         private const val LOGGING_DATA_BUNDLE = "LOGGER"
