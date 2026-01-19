@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.safeArgs)
 }
@@ -13,12 +13,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.feature_xml_userlist"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,12 +44,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.viewmodel)
     implementation(libs.activity.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.fragment.ktx)
     implementation(libs.fragment.navigation)
     implementation(libs.ui.navigation)
     implementation(libs.datastore)
+    implementation(project(":core-navigation"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
 }

@@ -22,7 +22,10 @@ class FragmentA(
 ) : Fragment() {
     private lateinit var binding: FragmentABinding
     private lateinit var navController: NavController
-    private val viewModelShared by viewModels<SharedViewModel> { viewModelProvider }
+    private val viewModelShared by viewModels<SharedViewModel> {
+
+        viewModelProvider
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,18 +41,17 @@ class FragmentA(
         observeViewModel()
         setUpClickListeners()
         parentFragmentManager.setFragmentResultListener(
-            "fragmentA_callback_key3455",
+            "key3455",
             viewLifecycleOwner
-        ) { requestKey, bundle ->
-            if (requestKey == "fragmentA_callback_key3455") {
+        ) { _, bundle ->
                 Toast.makeText(
                     requireContext(),
                     bundle.getString("result"), Toast.LENGTH_SHORT
                 )
                     .show()
-            }
         }
     }
+
 
     private fun setUpClickListeners() {
         binding.incrementButton.setOnClickListener {
