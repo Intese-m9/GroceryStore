@@ -7,7 +7,3 @@ interface FeatureNavigation {
     fun navigateToGroceryStore(context: Context): Intent
     fun navigateToUserList(context:Context): Intent
 }
-
-    object GlobalNavigator {
-    lateinit var navigator: FeatureNavigation
-}

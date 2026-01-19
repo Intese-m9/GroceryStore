@@ -5,7 +5,7 @@ import android.content.Intent
 import com.example.core.navigation.FeatureNavigation
 
 
-class AppNavigator : FeatureNavigation {
+class AppNavigator() : FeatureNavigation {
     override fun navigateToGroceryStore(context: Context): Intent {
         return Intent(
             context,

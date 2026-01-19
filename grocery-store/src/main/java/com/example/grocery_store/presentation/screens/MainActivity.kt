@@ -23,15 +23,14 @@ import com.example.grocery_store.ui.theme.GroceryStoreTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.core.navigation.GlobalNavigator
-import com.example.grocery_store.data.di.MyApplication
+import com.example.grocery_store.data.di.AppContainer
+import com.example.grocery_store.presentation.utils.events.AppDependencies
 import com.example.grocery_store.presentation.utils.events.UIStateEvent
 import com.example.grocery_store.presentation.viewmodels.ProductViewModelFeature
 
 class MainActivity : ComponentActivity() {
-
     private val appContainer by lazy {
-        MyApplication().appContainer
+        AppContainer()
     }
     private val viewModelFeature: ProductViewModelFeature by viewModels {
         appContainer.viewModelFeatureFactory
@@ -81,9 +80,7 @@ class MainActivity : ComponentActivity() {
                         )
                         Text(
                             modifier = Modifier.clickable {
-                                val intent =
-                                    GlobalNavigator.navigator.navigateToUserList(this@MainActivity)
-                                startActivity(intent)
+                                AppDependencies.navigateToUserList(this@MainActivity)
                             }, text = "Go to Feature"
                         )
                     }
