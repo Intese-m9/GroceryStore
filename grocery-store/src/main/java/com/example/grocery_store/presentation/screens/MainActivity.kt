@@ -18,22 +18,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.grocery_store.ui.theme.GroceryStoreTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.grocery_store.data.di.AppContainer
-import com.example.grocery_store.presentation.utils.events.AppDependencies
+import com.example.core.navigation.navigateToUserList
+import com.example.grocery_store.data.di.GroceryContainer
 import com.example.grocery_store.presentation.utils.events.UIStateEvent
 import com.example.grocery_store.presentation.viewmodels.ProductViewModelFeature
 
 class MainActivity : ComponentActivity() {
-    private val appContainer by lazy {
-        AppContainer()
+    private val featureContainer by lazy {
+        GroceryContainer()
     }
     private val viewModelFeature: ProductViewModelFeature by viewModels {
-        appContainer.viewModelFeatureFactory
+        featureContainer.viewModelFeatureFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GroceryStoreTheme {
                 val navController = rememberNavController()
+                val context = LocalContext.current
                 LaunchedEffect(viewModelFeature) {
                     viewModelFeature.showToast.collect { stateEvent ->
                         when (stateEvent) {
@@ -80,7 +82,7 @@ class MainActivity : ComponentActivity() {
                         )
                         Text(
                             modifier = Modifier.clickable {
-                                AppDependencies.navigateToUserList(this@MainActivity)
+                                context.navigateToUserList()
                             }, text = "Go to Feature"
                         )
                     }

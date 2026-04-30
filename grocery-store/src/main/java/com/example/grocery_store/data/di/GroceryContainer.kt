@@ -6,7 +6,7 @@ import com.example.grocery_store.data.repositoryIMPL.GetAllProductsImpl
 import com.example.grocery_store.domain.usecase.GetAllProductsUseCase
 import com.example.grocery_store.presentation.viewmodels.MyViewModelFactory
 
-class AppContainer {
+class GroceryContainer {
     private val productsMapper =
         ProductsMapper()
     private val fakeUserApiService =
