@@ -56,10 +56,10 @@ class FragmentB(
             viewModelShared.decrement()
         }
         binding.transitionButtonToAFragment.setOnClickListener {
-            val result = "ДРуацвывыаываываыва"
+            val messageFromFragmentB = "Hello!"
             parentFragmentManager.setFragmentResult(
-                "fragmentA_callback_key3455",
-                bundleOf("result" to result)
+                "key3455",
+                bundleOf("result" to messageFromFragmentB)
             )
             navController.popBackStack()
         }
