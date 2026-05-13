@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feature_xml_userlist.databinding.ActivityMainBinding
-import com.example.feature_xml_userlist.di.FeatureContainer
+import com.example.feature_xml_userlist.di.UserListContainer
 import com.example.feature_xml_userlist.presentation.actions.UserEvent
 import com.example.feature_xml_userlist.presentation.adapters.UsersAdapter
 import com.example.feature_xml_userlist.presentation.screens.fragments.FragmentsFactory
@@ -25,12 +25,16 @@ import kotlin.getValue
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemTouchListener: ItemTouchHelper
-    private val viewModelFeature: UserViewModel by viewModels()
+    private val viewModelFeature: UserViewModel by viewModels {
+        // Здесь вы должны обратиться к вашему контейнеру
+        // Например, если он лежит в Application классе:
+        featureContainer.provideUserViewModelFactory()
+    }
     private val usersAdapter = UsersAdapter { user ->
         viewModelFeature.selectedUser(user)
     }
     val featureContainer by lazy {
-        FeatureContainer(this)
+        UserListContainer(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -2,7 +2,7 @@ package com.example.core.navigation
 
 import android.content.Context
 
-val Context.appContainer: AppContainerProvider? get() = applicationContext as? AppContainerProvider
+private val Context.appContainer: AppContainerProvider? get() = applicationContext as? AppContainerProvider
 
 /**
  * Удобный хелпер для навигации.

@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":grocery-store"))
     implementation(project(":feature-xml-userList"))
     implementation(project(":core-navigation"))
+    implementation(project(":core-network"))
     ksp(libs.room.compiler)
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)

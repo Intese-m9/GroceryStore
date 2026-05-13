@@ -29,6 +29,8 @@ composeNavigation = "2.8.5"
 hiltNavCompose = "1.2.0"
 framgentNav = "2.7.7"
 datastore = "1.1.1"
+converter = "1.0.0"
+okHTTP = "4.11.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -69,9 +71,12 @@ fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref
 fragment-navigation = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "framgentNav" }
 ui-navigation = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "framgentNav" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+retrofit-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "converter"}
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHTTP" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp"}
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 safeArgs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "framgentNav"}
+kotlin-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}

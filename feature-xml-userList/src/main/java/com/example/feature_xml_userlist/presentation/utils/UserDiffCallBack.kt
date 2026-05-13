@@ -3,23 +3,24 @@ package com.example.feature_xml_userlist.presentation.utils
 import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import com.example.feature_xml_userlist.domain.models.User
+import com.example.feature_xml_userlist.presentation.models.UserPresentation
 
-object UserDiffCallBack : DiffUtil.ItemCallback<User>() {
+object UserDiffCallBack : DiffUtil.ItemCallback<UserPresentation>() {
     override fun areItemsTheSame(
-        oldItem: User,
-        newItem: User
+        oldItem: UserPresentation,
+        newItem: UserPresentation
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: User,
-        newItem: User
+        oldItem: UserPresentation,
+        newItem: UserPresentation
     ): Boolean {
         return oldItem == newItem
     }
 
-    override fun getChangePayload(oldItem: User, newItem: User): Any? {
+    override fun getChangePayload(oldItem: UserPresentation, newItem: UserPresentation): Any? {
         val payload = mutableListOf<String>()
 
         if (oldItem.name != newItem.name) {

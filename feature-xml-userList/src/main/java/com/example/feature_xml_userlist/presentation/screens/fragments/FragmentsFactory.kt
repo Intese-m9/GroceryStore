@@ -2,10 +2,10 @@ package com.example.feature_xml_userlist.presentation.screens.fragments
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.example.feature_xml_userlist.di.FeatureContainer
+import com.example.feature_xml_userlist.di.UserListContainer
 
 class FragmentsFactory(
-    private val featureContainer: FeatureContainer
+    private val featureContainer: UserListContainer
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {

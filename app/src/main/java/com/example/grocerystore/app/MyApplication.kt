@@ -10,4 +10,5 @@ class MyApplication : Application(), AppContainerProvider {
 
     override val navigator: FeatureNavigation
         get() = appContainer.navigator
+
 }

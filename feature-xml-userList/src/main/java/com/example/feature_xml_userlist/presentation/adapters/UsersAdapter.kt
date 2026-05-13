@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature_xml_userlist.databinding.ItemUserBinding
-import com.example.feature_xml_userlist.domain.models.User
+import com.example.feature_xml_userlist.presentation.models.UserPresentation
 import com.example.feature_xml_userlist.presentation.utils.UserDiffCallBack
 
 class UsersAdapter(
-    private val onUserClick: (User) -> Unit,
-) : ListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCallBack) {
+    private val onUserClick: (UserPresentation) -> Unit,
+) : ListAdapter<UserPresentation, UsersAdapter.UserViewHolder>(UserDiffCallBack) {
     private var onStartDrag: ((RecyclerView.ViewHolder) -> Unit)? = null
 
     fun setOnStartDruggable(listener: (RecyclerView.ViewHolder) -> Unit) {
@@ -84,7 +84,7 @@ class UsersAdapter(
             }
         }
 
-        fun bindFull(user: User) {
+        fun bindFull(user: UserPresentation) {
             binding.userName.text = user.name
             binding.userEmail.text = user.email
             updateReadColor(user.isRead)
